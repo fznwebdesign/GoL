@@ -1,0 +1,118 @@
+<!doctype html>
+
+<html>
+
+    <head>
+		<title>GoL for CrowdInt</title>
+		<!-- jQuery Libraries to reduce my coding time a little bit -->
+		<script type="text/javascript" src="jquery-2.0.3.min.js"></script>
+		<script type="text/javascript" src="GoL.js"></script>
+		<script type="text/javascript">
+			var game;
+			$(document).ready(function(){
+				/* Game Starter / Iniciador del juego */
+				game = $("#GridContainer");
+				game.GoL({
+					grid : [5,5],
+					speed: $("#speed").val()
+				});
+				
+				/* jQuery Controls */
+				
+				// Grid size
+				$("#UpdateGrid").on("click",function(){
+					var valX,valY;
+					valX = parseInt($("#gridX").val());
+					valY = parseInt($("#gridY").val());
+					
+					game.GoL({grid:[valX,valY]});
+					//game.data("GoL").read();
+				});
+				// Speed
+				$("#speed").on("change",function(){
+					game.GoL(parseInt($("#speed").val()));
+				});
+				// Edit
+				$("#btnDraw").on("click",function(){
+					var $el = $(this);
+					if($el.hasClass("editing")){
+						game.GoL("editEnd");
+						$el.removeClass("editing").val("Draw");
+						$("#btnStartStop").val("Stop").attr("disabled",false);
+						$("#btnDemo").attr("disabled",false);
+					}else{
+						game.GoL("edit");
+						$el.addClass("editing").val("Create Life");
+						$("#btnStartStop").val("Start").attr("disabled",true);
+						$("#btnDemo").attr("disabled",true);
+					}
+				});
+				// Animation and data
+				$("#btnStartStop").on("click",function(){
+					var $el = $(this),
+						newVal = "";
+					game.GoL("toggle");
+					newVal = (game.data("GoL").vals.start) ? "Stop" : "Start";
+					$el.val(newVal);
+				});
+				$("#btnReset").on("click",function(){
+					var $el = $("#btnStartStop"),
+						newVal = "";
+					if(!$("#btnDraw").hasClass("editing")){
+						$("#btnDemo").attr("disabled",false);
+					}
+					game.GoL("reset");
+					newVal = (game.data("GoL").vals.start) ? "Stop" : "Start";
+					$el.val(newVal);
+				});
+				$("#btnDemo").on("click",function(){
+					var $el = $("#btnStartStop"),
+						newVal = "";
+					game.GoL("demo");
+					newVal = (game.data("GoL").vals.start) ? "Stop" : "Start";
+					$el.val(newVal);
+					$(this).attr("disabled",true);
+				});
+			})
+		</script>
+		<link rel="stylesheet" type="text/css" href="styles.css">
+    </head>
+
+    <body>
+		<h1>Game of Life</h1>
+		<div id="GridContainer"></div>
+		<form>
+			<div>
+				<h2 class="title">Change grid size:</h2>
+				<input type="text" id="gridX"> x
+				<input type="text" id="gridY">
+				<span class="legend">
+					Min-Size: 5 cells<br />
+					Max-Size: 150 cells
+				</span>
+				<input type="button" id="UpdateGrid" class="button" value="update">
+			</div>
+			<div>
+				<h2 class="title">Change speed:</h2>
+				<select id="speed">
+					<option value="1000">Very Slow</option>
+					<option value="500">Slow</option>
+					<option value="250" selected="selected">Normal</option>
+					<option value="125">Fast</option>
+					<option value="60">UltraFast</option>
+				<select>
+			</div>
+			<div>
+				<div class="title">Controls:</div>
+				<input type="button" id="btnStartStop" class="button" value="Stop">
+				<input type="button" id="btnReset" class="button" value="Clear">
+				<input type="button" id="btnDemo" class="button" value="Demo" disabled="disabled">
+			</div>
+			<div>
+				<div class="title">Draw your own game:</div>
+				<input type="button" id="btnDraw" class="button" value="Draw">
+			</div>
+		</form>
+    </body>
+
+</html>
