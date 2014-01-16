@@ -1,0 +1,49 @@
+/**
+ * Pedro Carrazco | Game of Life 1.0
+ * 
+ * No Copyright so far
+ * Sin Copyright hasta ahora
+ * 
+ * This project is a test for Crowd Int created by Pedro Carrazco,
+ * reproduction is totally allowed as this code is just for fun.
+ * 
+ * Este proyecto es una prueba para Crowd Int creada por Pedro Carrazco,
+ * cualquier reproducción es permitida debido a que este codigo tiene 
+ * fines únicamente de entretenimiento.
+ * 
+ * @version 1.0
+ * @author Pedro Jose Carrazco Rivera
+ */
+ 
+ /* General Styles */
+ body,html,div{
+	margin:0;
+	padding:0;
+	background-color: white;
+	overflow:hidden;
+ }
+ body{
+	padding:10px;
+ }
+ /* Interface Styles */
+ 
+ 
+ /* Game of Life Styles */
+ #GRID{
+	border-bottom: 1px solid #CCC;
+	border-right: 1px solid #CCC;
+	float:left;
+ }
+ .cell{
+	border-left: 1px solid #CCC;
+	border-top: 1px solid #CCC;
+	height:5px;
+	float:left;
+	width:5px;
+ }
+ .row{
+	clear:both;
+ }
+ .cell.live{
+	background-color:black;
+ }
