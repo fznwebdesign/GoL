@@ -1,7 +1,7 @@
 Game of Live 1.0
 ===
 
-This is my implementation of the Game of Live, created as a jQuery Plugin (based on jQuery v2.0.3 but it may work with previous versions).
+This is my javascript implementation of the Game of Live (for more info, click [here](http://en.wikipedia.org/wiki/Conway's_Game_of_Life)), created as a jQuery Plugin (based on jQuery v2.0.3 but it may work with previous versions).
 
 I tried to create an interface as simple as possible, a wide set of customizable settings and interaction controls.
 
