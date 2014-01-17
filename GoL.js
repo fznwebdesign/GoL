@@ -43,6 +43,7 @@ $.GoL.prototype = {
 	editing: false,
 	noChange: false,
 	init:function(){
+		this.genCSS();
 		this.renderGrid();
 		if($.isEmptyObject(this.vals.cells)){
 			this.print(this.vals.demo);
@@ -355,6 +356,18 @@ $.GoL.prototype = {
 		this.editing = false;
 		this.noChange = false;
 		this.update({cells:newCells,start:true});
+	},
+	genCSS: function(){
+		var css = "",$el=null;
+		if($("GRIDCSS").length<=0){
+			css += "#GRID{background-color:white;border-bottom:1px solid #CCC;border-right:1px solid #CCC;}";
+			css += "#GRID .cell{border-left: 1px solid #CCC;border-top: 1px solid #CCC;height:10px;float:left;width:10px;}";
+			css += "#GRID .row{clear:both;}";
+			css += "#GRID .cell.live{background-color:black;}";
+			$el = $("<style>");
+			$el.attr("id","GRIDCSS").append(css);
+			$("body").append($el);
+		}
 	}
 }
 // jQuery Plugin
