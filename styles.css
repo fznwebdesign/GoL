@@ -134,22 +134,16 @@ h1{
 }
 
  
- /* Game of Life Styles */
- #GRID{
-	background-color: white;
-	border-bottom: 1px solid #CCC;
-	border-right: 1px solid #CCC;
+ /* Custom Game of Life Styles */
+ #GridContainer #GRID{
 	border-radius: 5px;
 	box-shadow:0px 0px 10px #000;
 	margin-left:-50%;
 	margin-top:-50%;
  }
- .cell{
-	border-left: 1px solid #CCC;
-	border-top: 1px solid #CCC;
-	height:10px;
-	float:left;
-	width:10px;
+ #GridContainer #GRID .cell{
+	height:8px;
+	width:8px;
 
 	/* CSS3 Transitions, IE7-8 Not Available */
 	  -webkit-transition-duration: 0.2s;
@@ -157,10 +151,4 @@ h1{
 		  -ms-transition-duration: 0.2s;
 		   -o-transition-duration: 0.2s;
 			  transition-duration: 0.2s;
- }
- .row{
-	clear:both;
- }
- .cell.live{
-	background-color:black;
  }
