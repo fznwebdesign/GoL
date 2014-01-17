@@ -62,6 +62,16 @@ h1{
 	right:0;
 	top: 100px;
 	width:200px;
+	
+	/* CSS3 Transitions, IE7-8 Not Available */
+	  -webkit-transition-duration: 0.5s;
+		 -moz-transition-duration: 0.5s;
+		  -ms-transition-duration: 0.5s;
+		   -o-transition-duration: 0.5s;
+			  transition-duration: 0.5s;
+}
+#tab.closed{
+	right:-212px;
 }
 #tab h2{
 	font: 16px/1.2 normal Arial, Helvetica, sans-serif;
@@ -107,6 +117,11 @@ h1{
 	margin:0;
 	padding:5px 10px;
 }
+#tab div input[disabled]{
+	background-color:#CCC;
+	border-color:#999;
+	color:#999;
+}
 #tab div .legend{
 	background-color:#F6F6F6;
 	border:1px solid #F6F6F6;
@@ -135,6 +150,13 @@ h1{
 	height:10px;
 	float:left;
 	width:10px;
+
+	/* CSS3 Transitions, IE7-8 Not Available */
+	  -webkit-transition-duration: 0.2s;
+		 -moz-transition-duration: 0.2s;
+		  -ms-transition-duration: 0.2s;
+		   -o-transition-duration: 0.2s;
+			  transition-duration: 0.2s;
  }
  .row{
 	clear:both;
