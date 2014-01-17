@@ -101,7 +101,7 @@ $.GoL.prototype = {
 				params = {speed:params};
 			break;
 			case "object":
-				if(this.validateCell(params)){
+				if(this.validateGrid(params)){
 					params = {grid:params};
 				}
 			break;
@@ -308,6 +308,14 @@ $.GoL.prototype = {
 		// Validate position / Revisar que la posicion sea valida
 		res = (cell[0] < 0 || cell[0] >= this.vals.grid[0]) ? false : res;
 		res = (cell[1] < 0 || cell[1] >= this.vals.grid[1]) ? false : res;
+		return res;
+	},
+	validateGrid: function(grid){
+		// Check format / Revisar el formato
+		var res = (!grid instanceof Array || grid.length != 2 || typeof grid[0] != "number" || typeof grid[1] != "number") ? false : true;
+		// Validate position / Revisar que la posicion sea valida
+		res = (grid[0] < 0) ? false : res;
+		res = (grid[1] < 0) ? false : res;
 		return res;
 	},
 	begin: function(){
