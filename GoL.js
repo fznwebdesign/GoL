@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Pedro Carrazco | Game of Life 1.0
  * 
  * No Copyright so far
@@ -105,17 +105,18 @@ $.GoL.prototype = {
 			break;
 		}
 		if(typeof params == "object"){
-			//console.log(params)
 			$.extend(this.vals,params);
 			
 			// Update grid size
 			if(!$.isEmptyObject(params.grid)){
-				tmp = this.read();
-				this.renderGrid();
-				this.print(tmp)
-				if(this.editing){
-					this.editing = false;
-					this.edit();
+				if(params.grid instanceof Array && params.grid.length == 2 && typeof params.grid[0] > 0 && typeof params.grid[1] > 0){
+					tmp = this.read();
+					this.renderGrid();
+					this.print(tmp)
+					if(this.editing){
+						this.editing = false;
+						this.edit();
+					}
 				}
 			}
 			
@@ -230,6 +231,7 @@ $.GoL.prototype = {
 				tR = (i < 0) ? this.vals.grid[1]-1 : (i >= this.vals.grid[1]) ? 0 : i;
 				// Exclude self status / Excluye el status de si mismo
 				if(tR != r || tC != c){
+					console.log(this.vGrid,tR,tC)
 					res.push(this.vGrid[tR][tC]);
 				}
 			}
@@ -293,7 +295,6 @@ $.GoL.prototype = {
 		this.renderGrid();
 	},
 	load: function(data){
-		console.log("load: ",data);
 		var i,len,cell;
 		// Validate data / Validar informacion
 		if(data instanceof Array && data.length > 0){
@@ -301,7 +302,6 @@ $.GoL.prototype = {
 			for(i=0,len=data.length;i<len;i++){
 				cell = data[i];
 				if(this.validateCell(cell)){
-					console.log(this.vGrid,cell[0],cell[1]);
 					this.vGrid[cell[0]][cell[1]] = true;
 				}
 			}
@@ -369,10 +369,9 @@ $.fn.extend({
 		return this.each(function() {
 			var $this = $(this), GoL = $this.data("GoL");
 			if (!GoL){
-				if(typeof params == "object"){
-					GoL = new $.GoL($this,params);
-					$this.data("GoL", GoL);
-				}
+				params = params || {};
+				GoL = new $.GoL($this,params);
+				$this.data("GoL", GoL);
 			}else{
 				$this.data("GoL").update(params);
 			}
