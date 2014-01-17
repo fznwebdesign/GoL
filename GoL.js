@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Pedro Carrazco | Game of Life 1.0
  * 
  * No Copyright so far
@@ -77,6 +77,7 @@ $.GoL.prototype = {
 					break;
 					case "reset":
 						this.reset();
+						this.vals.start = false;
 						if(this.editing){
 							this.editing = false;
 							this.edit();
@@ -99,7 +100,7 @@ $.GoL.prototype = {
 				params = {speed:params};
 			break;
 			case "object":
-				if(params instanceof Array){
+				if(this.validateCell(params)){
 					params = {grid:params};
 				}
 			break;
@@ -109,14 +110,12 @@ $.GoL.prototype = {
 			
 			// Update grid size
 			if(!$.isEmptyObject(params.grid)){
-				if(params.grid instanceof Array && params.grid.length == 2 && typeof params.grid[0] > 0 && typeof params.grid[1] > 0){
-					tmp = this.read();
-					this.renderGrid();
-					this.print(tmp)
-					if(this.editing){
-						this.editing = false;
-						this.edit();
-					}
+				tmp = this.read();
+				this.renderGrid();
+				this.print(tmp)
+				if(this.editing){
+					this.editing = false;
+					this.edit();
 				}
 			}
 			
@@ -144,13 +143,9 @@ $.GoL.prototype = {
 			}
 			// Update start
 			if(typeof params.start != "undefined" && params.start){
-				if(!$.isEmptyObject(this.vals.cells)){
-					this.print(this.vals.cells);
-				}else if(this.vals.demo){
-					this.print(true);
+				if(!$.isEmptyObject(this.vals.cells) || this.vals.demo){
+					this.begin();
 				}
-				this.noChange = false;
-				this.begin();
 			}
 		}
 	},
@@ -231,7 +226,6 @@ $.GoL.prototype = {
 				tR = (i < 0) ? this.vals.grid[1]-1 : (i >= this.vals.grid[1]) ? 0 : i;
 				// Exclude self status / Excluye el status de si mismo
 				if(tR != r || tC != c){
-					console.log(this.vGrid,tR,tC)
 					res.push(this.vGrid[tR][tC]);
 				}
 			}
